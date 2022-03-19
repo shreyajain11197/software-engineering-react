@@ -109,7 +109,7 @@ describe('findAllUsers',  () => {
 
   // sample users we'll insert to then retrieve
   const usernames = [
-    "larry", "curley", "moe"
+    "larry", "curley", "moe","stephCurry"
   ];
 
   // setup data before test
@@ -128,7 +128,7 @@ describe('findAllUsers',  () => {
   afterAll(() =>
       // delete the users we inserted
       usernames.map(username =>
-          deleteUsersByUsername(username)
+          deleteUsersByUsername(username.username)
       )
   );
 

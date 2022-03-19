@@ -103,15 +103,16 @@ describe('can retrieve all tuits with REST API',  () => {
 
     // sample tuits we'll insert to then retrieve
     const tuits = [
-        "larry", "curley", "moe"
+        "spacex", "nasa-logo", "spacex"
     ];
+
 
     // setup data before test
     beforeAll(() =>
         // insert several known users
         tuits.map(individualTuit =>
             createTuit({
-                tuit: `${individualTuit} is my name`,
+                tuit: `${individualTuit} is the best.`,
                 postedBy: `${individualTuit}`
             })
         )
@@ -121,7 +122,7 @@ describe('can retrieve all tuits with REST API',  () => {
     afterAll(() =>
         // delete the users we inserted
         tuits.map(individualTuit =>
-            deleteTuitsByUsername(individualTuit)
+            deleteTuitsByUsername(individualTuit.postedBy)
         )
     );
 
@@ -140,7 +141,7 @@ describe('can retrieve all tuits with REST API',  () => {
         tuitsWeInserted.forEach(tuit => {
             const tuitsFromDb = tuits.find(tuitsFromDb => tuitsFromDb === tuit.postedBy);
             expect(tuit.postedBy).toEqual(tuitsFromDb);
-            expect(tuit.tuit).toEqual(`${tuitsFromDb} is my name`);
+            expect(tuit.tuit).toEqual(`${tuitsFromDb} is the best.`);
         });
     });
 });
