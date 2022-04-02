@@ -18,7 +18,7 @@ export const UserList = ({users, deleteUser}) => {
                 e.preventDefault()
                 deleteUser(user._id)
               }} className="btn btn-danger fa-pull-right">
-                <i className="fas fa-remove"/>
+                <i className="fas fa-remove"></i>
               </button>
             </Link>
           )
