@@ -7,7 +7,7 @@ test('dislikes render', () => {
     act(() => {
         dislikesRender = create(
             <Dislikes
-                dislikes={dislikesJson}/>
+                dislike={dislikesJson}/>
         )
     })
     const root = dislikesRender.root
