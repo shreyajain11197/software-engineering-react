@@ -24,6 +24,6 @@ test('tuit list renders async', async () => {
         <HashRouter>
             <Tuits tuits={tuits}/>
         </HashRouter>);
-    const linkElement = screen.getByText(/spacecraft/i);
+    const linkElement = screen.getByText(/NASA/i);
     expect(linkElement).toBeInTheDocument();
 })

@@ -22,7 +22,7 @@ describe('can create tuit with REST API', () => {
     // clean up after test runs
     afterAll(() => {
         // remove any data we created
-        return deleteTuitsByUsername(tuitByNasa.postedBy);
+        return deleteTuitsByUsername(tuitByNasa.postedBy.username);
     })
 
     test('can insert new tuits with REST API', async () => {
@@ -31,7 +31,7 @@ describe('can create tuit with REST API', () => {
 
         // verify inserted user's properties match parameter user
         expect(newTuit.tuit).toEqual(tuitByNasa.tuit);
-        expect(newTuit.postedBy).toEqual(tuitByNasa.postedBy)
+        expect(newTuit.postedBy.username).toEqual(tuitByNasa.postedBy.username)
     });
 });
 
@@ -51,12 +51,12 @@ describe('can delete tuit with REST API', () => {
     // clean up after test runs
     afterAll(() => {
         // remove any data we created
-        return deleteTuitsByUsername(tuitBySpaceX.postedBy);
+        return deleteTuitsByUsername(tuitBySpaceX.postedBy.username);
     })
 
     test('can delete tuits from REST API by username', async () => {
         // delete a tuit by the user who posted it. Assumes user already exists
-        const status = await deleteTuitsByUsername(tuitBySpaceX.postedBy);
+        const status = await deleteTuitsByUsername(tuitBySpaceX.postedBy.username);
 
         // verify we deleted at least one user by their username
         expect(status.deletedCount).toBeGreaterThanOrEqual(1);
@@ -72,13 +72,13 @@ describe('can retrieve a tuit by their primary key with REST API', () => {
     // setup before running test
     beforeAll(() => {
         // clean up before the test making sure the user doesn't already exist
-        return deleteTuitsByUsername(tuitByAdam.postedBy)
+        return deleteTuitsByUsername(tuitByAdam.postedBy.username)
     });
 
     // clean up after ourselves
     afterAll(() => {
         // remove any data we inserted
-        return deleteTuitsByUsername(tuitByAdam.postedBy);
+        return deleteTuitsByUsername(tuitByAdam.postedBy.username);
     });
 
     test('can retrieve user from REST API by primary key', async () => {
@@ -87,14 +87,14 @@ describe('can retrieve a tuit by their primary key with REST API', () => {
 
         // verify new tuit matches the parameter tuit
         expect(newTuit.tuit).toEqual(tuitByAdam.tuit);
-        expect(newTuit.postedBy).toEqual(tuitByAdam.postedBy);
+        expect(newTuit.postedBy.username).toEqual(tuitByAdam.postedBy.username);
 
         // retrieve the tuit from the database by its primary key
         const existingTuit = await findTuitById(newTuit._id);
 
         // verify retrieved tuit matches parameter tuit
         expect(existingTuit.tuit).toEqual(tuitByAdam.tuit);
-        expect(existingTuit.postedBy).toEqual(tuitByAdam.postedBy);
+        expect(existingTuit.postedBy.username).toEqual(tuitByAdam.postedBy.username);
     });
 
 });
